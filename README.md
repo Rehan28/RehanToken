@@ -1,6 +1,5 @@
-Sure! Here’s the `.md` file ready for copy-paste:
 
-````markdown
+
 # RehanToken Hardhat Project
 
 This project showcases a **simple ERC-20 token** using Hardhat, OpenZeppelin, and Node.js for testing and deployment on the Ethereum Sepolia testnet.
@@ -13,11 +12,11 @@ You can learn more about Hardhat [here](https://hardhat.org/docs/getting-started
 
 This project includes:
 
-- A standard ERC-20 smart contract (`RehanToken.sol`)  
-- Hardhat configuration for Sepolia testnet deployment  
-- TypeScript deployment and testing scripts  
-- Node.js native test runner (`node:test`) examples  
-- Integration with `viem` for Ethereum interactions  
+* A standard ERC-20 smart contract (`RehanToken.sol`)
+* Hardhat configuration for Sepolia testnet deployment
+* TypeScript deployment and testing scripts
+* Node.js native test runner (`node:test`) examples
+* Integration with `viem` for Ethereum interactions
 
 ---
 
@@ -29,7 +28,7 @@ To run all tests:
 
 ```bash
 npx hardhat test
-````
+```
 
 You can also run only Solidity or Node.js tests:
 
@@ -99,6 +98,7 @@ console.log("Balance:", ethers.utils.formatUnits(balance, 18));
 
 ---
 
+### GitHub Repository
+
 All code and deployment scripts are available on GitHub:
 
-```
