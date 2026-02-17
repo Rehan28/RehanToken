@@ -1,57 +1,104 @@
-# Sample Hardhat 3 Beta Project (`node:test` and `viem`)
+Sure! Here’s the `.md` file ready for copy-paste:
 
-This project showcases a Hardhat 3 Beta project using the native Node.js test runner (`node:test`) and the `viem` library for Ethereum interactions.
+````markdown
+# RehanToken Hardhat Project
 
-To learn more about the Hardhat 3 Beta, please visit the [Getting Started guide](https://hardhat.org/docs/getting-started#getting-started-with-hardhat-3). To share your feedback, join our [Hardhat 3 Beta](https://hardhat.org/hardhat3-beta-telegram-group) Telegram group or [open an issue](https://github.com/NomicFoundation/hardhat/issues/new) in our GitHub issue tracker.
+This project showcases a **simple ERC-20 token** using Hardhat, OpenZeppelin, and Node.js for testing and deployment on the Ethereum Sepolia testnet.
+
+You can learn more about Hardhat [here](https://hardhat.org/docs/getting-started#getting-started-with-hardhat-3).
+
+---
 
 ## Project Overview
 
-This example project includes:
+This project includes:
 
-- A simple Hardhat configuration file.
-- Foundry-compatible Solidity unit tests.
-- TypeScript integration tests using [`node:test`](nodejs.org/api/test.html), the new Node.js native test runner, and [`viem`](https://viem.sh/).
-- Examples demonstrating how to connect to different types of networks, including locally simulating OP mainnet.
+- A standard ERC-20 smart contract (`RehanToken.sol`)  
+- Hardhat configuration for Sepolia testnet deployment  
+- TypeScript deployment and testing scripts  
+- Node.js native test runner (`node:test`) examples  
+- Integration with `viem` for Ethereum interactions  
+
+---
 
 ## Usage
 
 ### Running Tests
 
-To run all the tests in the project, execute the following command:
+To run all tests:
 
-```shell
+```bash
 npx hardhat test
-```
+````
 
-You can also selectively run the Solidity or `node:test` tests:
+You can also run only Solidity or Node.js tests:
 
-```shell
+```bash
 npx hardhat test solidity
 npx hardhat test nodejs
 ```
 
-### Make a deployment to Sepolia
+---
 
-This project includes an example Ignition module to deploy the contract. You can deploy this module to a locally simulated chain or to Sepolia.
+### Deployment to Sepolia
 
-To run the deployment to a local chain:
+1. Make sure you have some **Sepolia ETH** in your wallet.
+2. Add your **private key** and Alchemy RPC URL in a `.env` file:
 
-```shell
-npx hardhat ignition deploy ignition/modules/Counter.ts
+```env
+PRIVATE_KEY=<your-wallet-private-key>
+ALCHEMY_API_URL=https://eth-sepolia.g.alchemy.com/v2/<your-api-key>
 ```
 
-To run the deployment to Sepolia, you need an account with funds to send the transaction. The provided Hardhat configuration includes a Configuration Variable called `SEPOLIA_PRIVATE_KEY`, which you can use to set the private key of the account you want to use.
+3. Compile the smart contract:
 
-You can set the `SEPOLIA_PRIVATE_KEY` variable using the `hardhat-keystore` plugin or by setting it as an environment variable.
-
-To set the `SEPOLIA_PRIVATE_KEY` config variable using `hardhat-keystore`:
-
-```shell
-npx hardhat keystore set SEPOLIA_PRIVATE_KEY
+```bash
+npx hardhat compile
 ```
 
-After setting the variable, you can run the deployment with the Sepolia network:
+4. Deploy using the Hardhat script:
 
-```shell
-npx hardhat ignition deploy --network sepolia ignition/modules/Counter.ts
+```bash
+npx hardhat run --network sepolia scripts/deploy.ts
+```
+
+After deployment, you will see something like:
+
+```
+RehanToken deployed to: 0x29f6d19c2add703127137e4ab7c91912d20e7764
+```
+
+> This is the **contract address**. Keep it safe for testing and token transfers.
+
+---
+
+### Using the Token
+
+Once deployed, you can:
+
+* **Add token to MetaMask:**
+
+  * Open MetaMask → Add Token → Custom Token → Paste contract address
+  * Symbol: `RHT`
+  * Decimals: `18`
+
+* **Transfer tokens with a script:**
+
+```ts
+const tx = await token.transfer("<recipient-address>", ethers.utils.parseUnits("10", 18));
+await tx.wait();
+console.log("Transfer complete!");
+```
+
+* **Check balance:**
+
+```ts
+const balance = await token.balanceOf("<address>");
+console.log("Balance:", ethers.utils.formatUnits(balance, 18));
+```
+
+---
+
+All code and deployment scripts are available on GitHub:
+
 ```
