@@ -1,7 +1,7 @@
 import { network } from "hardhat";
 
 async function main() {
-  const { viem } = await network.connect("sepolia"); // or "hardhat"
+  const { viem } = await network.connect("sepolia"); 
   const [deployer] = await viem.getWalletClients();
 
   console.log("Deploying with account:", deployer.account.address);
